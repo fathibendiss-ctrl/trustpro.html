@@ -428,15 +428,9 @@ select{appearance:none}
     const deliveryCost = delType === 'مكتب' ? (deliveryPrices[state]?.office || 0) : (deliveryPrices[state]?.home || 0);
     const totalAmount = basePrice + deliveryCost;
 
-    // إرسال حدث الـ Lead إلى Facebook Pixel
+    // إرسال حدث الـ Lead إلى Facebook Pixel (بدون قيمة مالية لتوسيع الاستهداف)
     if (typeof fbq !== 'undefined') {
-      fbq('track', 'Lead', {
-        value: totalAmount,
-        currency: 'DZD',
-        content_name: 'لوح تقطيع TRUST PRO',
-        content_category: 'أدوات المطبخ',
-        content_ids: [selectedSizeId]
-      });
+      fbq('track', 'Lead');
     }
 
     localStorage.setItem('lastOrderTime', now);
